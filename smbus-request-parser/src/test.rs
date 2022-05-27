@@ -9,11 +9,11 @@ struct Thing {
 impl CommandHandler for Thing {
     type Error = ();
 
-    fn handle_read_byte(&self) -> Option<u8> {
+    fn handle_read_byte(&mut self) -> Option<u8> {
         Some(self.byte_a)
     }
 
-    fn handle_read_byte_data(&self, reg: u8) -> Option<u8> {
+    fn handle_read_byte_data(&mut self, reg: u8) -> Option<u8> {
         match reg {
             1 => Some(self.byte_a),
             2 => Some(self.byte_b),
@@ -22,7 +22,7 @@ impl CommandHandler for Thing {
         }
     }
 
-    fn handle_read_word_data(&self, reg: u8) -> Option<u16> {
+    fn handle_read_word_data(&mut self, reg: u8) -> Option<u16> {
         match reg {
             7 => {
                 let data = self.byte_a as u16 | (self.byte_b as u16) << 8;
@@ -36,7 +36,7 @@ impl CommandHandler for Thing {
         }
     }
 
-    fn handle_read_block_data(&self, reg: u8, index: u8) -> Option<u8> {
+    fn handle_read_block_data(&mut self, reg: u8, index: u8) -> Option<u8> {
         match reg {
             11 => match index {
                 0 => Some(6),

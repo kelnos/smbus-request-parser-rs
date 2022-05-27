@@ -6,10 +6,10 @@ mod test;
 pub trait CommandHandler {
     type Error;
 
-    fn handle_read_byte(&self) -> Option<u8>;
-    fn handle_read_byte_data(&self, reg: u8) -> Option<u8>;
-    fn handle_read_word_data(&self, reg: u8) -> Option<u16>;
-    fn handle_read_block_data(&self, reg: u8, index: u8) -> Option<u8>;
+    fn handle_read_byte(&mut self) -> Option<u8>;
+    fn handle_read_byte_data(&mut self, reg: u8) -> Option<u8>;
+    fn handle_read_word_data(&mut self, reg: u8) -> Option<u16>;
+    fn handle_read_block_data(&mut self, reg: u8, index: u8) -> Option<u8>;
 
     fn handle_write_byte(&mut self, data: u8) -> Result<(), Self::Error>;
     fn handle_write_byte_data(&mut self, reg: u8, data: u8) -> Result<(), Self::Error>;
